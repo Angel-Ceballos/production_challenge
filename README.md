@@ -39,3 +39,38 @@ For testing we will focus not only on the inference time, but also the preproces
     - Yolov5 total mean time: 8.02 ms
     - Yolov8 might be a bit larger, but its preprocessing is significantly faster than yolov5, with a similar inference time and also slightly faster postprocessing. 
     - **Winner: YOLOV8**
+
+<a name="optimization"></a>
+Model Optimization
+------------
+For the model optimization, the first approach will be using onnx.
+- Onnx params:
+    - Img size: (640,480)
+    - Half (fp16): True
+    - Simplify: True
+    - Device: Gpu
+- Results:
+    - <img src="images/onnx_runtime.png" width="600" />
+    - Onnx optimization and runtime did not helped the model :(, it maintained somewhat pytorch inference time, this could be because Ultralytics does optimization using script before inference.
+
+Let now try with TensorRT, utilizing the same parameters as onnx.
+
+```shell
+$ python3 onnx_to_tensorrt.py -m yolov8n
+```
+```python
+def trt_timer(f,*args):   
+    start = perf_counter()
+    f.infer(*args)
+    return (1000 * (perf_counter() - start))
+
+print(f"Yolov8 TRT: {np.mean([trt_timer(trt_infer,t_img) for _ in range(10000)])} ms")
+```
+- Output: Yolov8 TRT: 2.392428541831032 ms
+- Conclusion: TensorRT optimization takes only 60% of the time compared to pytorch. In other words, its **166%** faster!
+
+
+
+
+
+
