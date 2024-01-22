@@ -149,13 +149,7 @@ cls = label_map[int(lbl)]
     - Videos 9 -> 12
         - Time Elapsed 886.7 s
         - Frames Processed:  130436
-
-Time Elapsed 33.4
-Frames Processed:  4464
-['/home/angel/computer_vision/production_challenge/videos/challenge_videos/video_9.mp4', '/home/angel/computer_vision/production_challenge/videos/challenge_videos/video_10.mp4', '/home/angel/computer_vision/production_challenge/videos/challenge_videos/video_11.mp4', '/home/angel/computer_vision/production_challenge/videos/challenge_videos/video_12.mp4']
-End
-Time Elapsed 886.7
-Frames Processed:  130436
+    - [Link to demo video](https://youtu.be/6zmuJJnPwxk)
 
 *Note: Reference to base article [Multiple Channel Video Inference in Python](https://abhishekchoudhary-32445.medium.com/multiple-channel-video-inference-in-python-6849bb3d3583)*
 
