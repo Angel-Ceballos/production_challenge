@@ -24,7 +24,7 @@ def post(postprocess, draw, pred_boxes, input_hw, orig_img, label_map, subset, r
     res.put(img_show)
 
 class VideoProcessing():
-    def __init__(self, input_dir, model_path, subset, batch, show) -> None:
+    def __init__(self, input_dir, model_path, subset, batch, draw) -> None:
         #LOAD MODEL
         self.model = YoloTRT(model_path, classes=subset)
         b,c,self.h, self.w = self.model.model.input_spec()[0]
@@ -33,7 +33,7 @@ class VideoProcessing():
         video_list = natsorted(os.listdir(input_dir))
         self.video_list = [os.path.join(input_dir, v) for v in video_list]
         self.batch_s = batch
-        self.show = show
+        self.show = draw
         
     def start_pipeline(self):
         for i in range(ceil(len(self.video_list)/self.batch_s)):
@@ -107,6 +107,7 @@ if __name__ == "__main__":
     video_path = "/home/angel/computer_vision/production_challenge/videos/challenge_videos"
     model_path = 'yolov8n-batch.trt'
     subset = ['car', 'motorcycle']
-    VideoProcessing(input_dir=video_path, model_path=model_path, subset=subset, draw=True, batch=4)
+    vp = VideoProcessing(input_dir=video_path, model_path=model_path, subset=subset, draw=True, batch=4)
+    vp.start_pipeline()
 
 
