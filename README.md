@@ -121,6 +121,7 @@ Yolov8 TRT: 8.16570611668958 ms
 Video Processor
 ------------
 The VideoProcessor class implements multithreading for video decode, preprocessing, postprocessing, and drawing. The idea is to have a subset of videos running in parallel with multithreading, while the GPU does inference with batches.
+
 <img src="images/SmartSelect_20240122_010717_Samsung Notes.jpg" width="500" />
 
 - Read Videos
