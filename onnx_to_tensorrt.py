@@ -56,7 +56,9 @@ import argparse
 
 import tensorrt as trt
 
-MAX_BATCH_SIZE = 1
+OPT_BATCH_SIZE = 4
+MIN_BATCH_SIZE = 4
+MAX_BATCH_SIZE = 4
 
 
 def load_onnx(model_name):
@@ -86,7 +88,7 @@ def set_net_batch(network, batch_size):
 def build_engine(model_name, do_int8, dla_core, verbose=False):
     """Build a TensorRT engine from ONNX using the older API."""
     net_c = 3
-    net_h, net_w = 640, 480
+    net_h, net_w = 480, 640
     print('Loading the ONNX file...')
     onnx_data = load_onnx(model_name)
     if onnx_data is None:
@@ -124,8 +126,8 @@ def build_engine(model_name, do_int8, dla_core, verbose=False):
             profile = builder.create_optimization_profile()
             profile.set_shape(
                 'input',                                # input tensor name
-                (MAX_BATCH_SIZE, net_c, net_h, net_w),  # min shape
-                (MAX_BATCH_SIZE, net_c, net_h, net_w),  # opt shape
+                (MIN_BATCH_SIZE, net_c, net_h, net_w),  # min shape
+                (OPT_BATCH_SIZE, net_c, net_h, net_w),  # opt shape
                 (MAX_BATCH_SIZE, net_c, net_h, net_w))  # max shape
             config.add_optimization_profile(profile)
             if dla_core >= 0:

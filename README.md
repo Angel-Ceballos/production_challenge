@@ -49,9 +49,9 @@ For the model optimization, the first approach will be using onnx.
     - Half (fp16): True
     - Simplify: True
     - Device: Gpu
-- Results:
+- Results: ONNX Runtime
     - <img src="images/onnx_runtime.png" width="600" />
-    - Onnx optimization and runtime did not helped the model :(, it maintained somewhat pytorch inference time, this could be because Ultralytics does optimization using script before inference.
+    - Onnx optimization and runtime did not helped the model :(, it maintained somewhat pytorchs inference time, this could be because Ultralytics does optimization using script before inference.
 
 Let now try with TensorRT, utilizing the same parameters as onnx.
 
