@@ -1,7 +1,5 @@
 from trt_infer.infer import TensorRTInfer
-from ObjectDetector import ObjectDetector
-
-
+from .ObjectDetector import ObjectDetector
 
 class YoloTRT(ObjectDetector):
     def __init__(self, model_path, classes) -> None:
