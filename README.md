@@ -126,14 +126,22 @@ The VideoProcessor class implements multithreading for video decode, preprocessi
 
 - Read Videos
 ```python
-# Video's path
-video_path = "/home/angel/computer_vision/production_challenge/videos/challenge_videos"
-video_list = natsorted(os.listdir(video_path))
-video_list = [os.path.join(video_path, v) for v in video_list]
+class VideoProcessing():
+    def __init__(self, input_dir, model_path, subset, batch, show) -> None:
+        #LOAD MODEL
+        self.model = YoloTRT(model_path, classes=subset)
+        b,c,self.h, self.w = self.model.model.input_spec()[0]
+        self.canvas = np.zeros((540,960,3), dtype="uint8")
+---->   # Video's path
+        video_list = natsorted(os.listdir(input_dir))
+        self.video_list = [os.path.join(input_dir, v) for v in video_list]
+        self.batch_s = batch
+        self.show = show
 ```
 - Detection with filter
 ```python
-subset = model.classes
+subset = self.model.classes
+
 cls = label_map[int(lbl)]
     label = f'{cls} {conf:.2f}'
     if cls not in subset:
