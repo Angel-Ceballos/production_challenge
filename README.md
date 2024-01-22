@@ -152,13 +152,14 @@ cls = label_map[int(lbl)]
         - Time Elapsed 36.4 s
         - Frames Processed:  5028
     - Videos 5-> 8
-        - Time Elapsed 36.4 s
-        - Frames Processed:  5028
+        - Time Elapsed 33.4 s
+        - Frames Processed:  4464
     - Videos 9 -> 12
         - Time Elapsed 886.7 s
         - Frames Processed:  130436
     - [Link to demo video](https://youtu.be/6zmuJJnPwxk)
 
-*Note: Reference to base article [Multiple Channel Video Inference in Python](https://abhishekchoudhary-32445.medium.com/multiple-channel-video-inference-in-python-6849bb3d3583)*
+- Check the report at [report.pdf](report.pdf)
 
+*Note: Reference to base article [Multiple Channel Video Inference in Python](https://abhishekchoudhary-32445.medium.com/multiple-channel-video-inference-in-python-6849bb3d3583)*
 
