@@ -7,6 +7,7 @@ Table of contents
 * [Optimization](#optimization)
 * [ObjectDetector](#detector)
 * [VideoProcessor](#video)
+* [Extra](#extra)
 
 <a name="comparison"></a>
 Model Comparison
@@ -163,3 +164,34 @@ cls = label_map[int(lbl)]
 
 *Note: Reference to base article [Multiple Channel Video Inference in Python](https://abhishekchoudhary-32445.medium.com/multiple-channel-video-inference-in-python-6849bb3d3583)*
 
+
+<a name="extra"></a>
+Deepstream Python
+------------
+For actual production it is recommended to use the hardware accelerated tech within the GPU. The following example is based on the [deepstream_python_apps](https://github.com/NVIDIA-AI-IOT/deepstream_python_apps) for multi input and multi output.
+
+```python
+#filtering
+PGIE_CLASS_ID_VEHICLE = 0
+obj_counter = {
+            PGIE_CLASS_ID_VEHICLE: 0,
+        }
+
+
+#pipeline nvstreamdemux -> queue -> nvvidconv -> nvosd -> (if Jetson) nvegltransform -> nveglgl
+print("Adding elements to Pipeline \n")
+pipeline.add(source)
+pipeline.add(h264parser)
+pipeline.add(decoder)
+pipeline.add(streammux)
+pipeline.add(pgie)
+pipeline.add(nvvidconv)
+pipeline.add(nvosd)
+pipeline.add(tee)
+pipeline.add(queue1)
+pipeline.add(queue2)
+pipeline.add(msgconv)
+pipeline.add(msgbroker)
+pipeline.add(sink)
+```
+- Output: Check the [example](https://youtu.be/ryXYWdpQzSo?si=_OlrVCsP585s_8on) running on a Jetson Orin Nano
